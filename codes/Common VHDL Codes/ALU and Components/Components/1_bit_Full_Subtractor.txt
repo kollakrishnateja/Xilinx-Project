@@ -1,0 +1,19 @@
+--1_bit_Full_Subtractor by KRISHNA TEJA(180001026) AND JAY BANGAR(180001022)
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity subtract is
+port(
+a,b,c:in std_logic;
+diff,bor:out std_logic
+);
+end subtract;
+
+architecture structural of subtract is
+
+begin
+diff<= a xor b xor c;
+bor<= ((not a)and(b or c))or(b and c);
+
+end structural;

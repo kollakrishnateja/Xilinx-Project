@@ -1,0 +1,17 @@
+--1_bit_Full_Adder by KRISHNA TEJA(180001026) AND JAY BANGAR(180001022)
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity fa is    --1 bit Full Adder
+port(
+a,b,c: in std_logic;
+sum,carry : out std_logic) ;
+end fa;
+
+architecture structural of fa is
+
+begin
+sum <= a xor b xor c;
+carry<= (a and b) or (c and a) or (c and b);
+end structural;

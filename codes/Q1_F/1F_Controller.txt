@@ -1,0 +1,39 @@
+--1F_Controller_by_KRISHNA TEJA(180001026) AND JAY BANGAR(180001022)
+
+----------------------------------------------------------------------------------
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity Q1_F_Controller is
+port(
+count: in std_logic_vector(2 downto 0);
+sel: out std_logic_vector(2 downto 0);
+enable,choose_alu: out std_logic
+);	
+end Q1_F_Controller;
+
+architecture Behavioral of Q1_F_Controller is
+signal ck: std_logic :='0';
+-- ALU 0 -> ADDITION , 1 -> SUBTRACTION , 2 -> AND , 3 -> OR , 4 -> NAND , 5 -> XOR , 6 -> INV(A) , 7 -> INV(B) 
+begin
+process(count) 
+begin
+enable<='1';
+if(ck = '0') then
+if(count="000" OR count="001" OR count="010") then
+sel<="011";
+choose_alu<='0';
+elsif(count="100" OR count="011")then
+sel<="100";
+choose_alu<='0';
+elsif(count="101" )then
+sel<="100";
+choose_alu<='0';
+ck<='1';
+end if;
+else
+sel<="101";
+choose_alu<='1';
+end if;
+end process;
+end Behavioral;

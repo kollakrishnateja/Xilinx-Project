@@ -1,0 +1,25 @@
+--Invert by KRISHNA TEJA(180001026) AND JAY BANGAR(180001022)
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity invert is
+port(
+a: in  std_logic_vector(7 downto 0);
+abar:out std_logic_vector(7 downto 0)
+);
+end invert;
+
+architecture structural of invert is
+
+begin
+
+abar(0)<= not a(0);
+abar(1)<= not a(1);
+abar(2)<= not a(2);
+abar(3)<= not a(3);
+abar(4)<= not a(4);
+abar(5)<= not a(5);
+abar(6)<= not a(6);
+abar(7)<= not a(7);
+end structural;

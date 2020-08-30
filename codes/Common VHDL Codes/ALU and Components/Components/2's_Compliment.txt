@@ -1,0 +1,33 @@
+--2's Compliment by KRISHNA TEJA(180001026) AND JAY BANGAR(180001022)
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity compliment is
+port(
+a: in std_logic_vector(7 downto 0);
+ac: out std_logic_vector(7 downto 0)
+);
+end compliment;
+
+architecture structural of compliment is
+component invert is
+port(
+a: in std_logic_vector(7 downto 0);
+abar: out std_logic_vector(7 downto 0)
+);
+end component;
+
+component adder is
+port(
+a,b: in std_logic_vector(7 downto 0);
+sum: out std_logic_vector(7 downto 0);
+carry: out std_logic
+);
+end component;
+signal f: std_logic_vector(7 downto 0);
+signal d: std_logic; 
+begin
+a1 : invert port map(a=>a,abar=>f);
+a2 : adder port map(a=>f,b=>"00000001",sum=>ac,carry=>d);
+end structural;

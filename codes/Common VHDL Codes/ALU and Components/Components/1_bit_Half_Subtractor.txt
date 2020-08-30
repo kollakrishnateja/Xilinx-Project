@@ -1,0 +1,17 @@
+--1_bit_Half_Subtractor by KRISHNA TEJA(180001026) AND JAY BANGAR(180001022)
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity half_sub is
+port(
+a,b: in std_logic;
+diff,bor:out std_logic
+);
+end half_sub;
+
+architecture structural of half_sub is
+begin
+diff<=a xor b;
+bor<= (not a) and b;
+end structural;

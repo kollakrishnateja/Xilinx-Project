@@ -1,0 +1,34 @@
+--1D_Controller_by_KRISHNA TEJA(180001026) AND JAY BANGAR(180001022)
+----------------------------------------------------------------------------------
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity Q1_D_Controller is
+port(
+count: in std_logic_vector(2 downto 0);
+sel: out std_logic_vector(2 downto 0);
+enable,choose_alu: out std_logic
+);
+end Q1_D_Controller;
+
+architecture Behavioral of Q1_D_Controller is
+-- ALU 0 -> ADDITION , 1 -> SUBTRACTION , 2 -> AND , 3 -> OR , 4 -> NAND , 5 -> XOR , 6 -> INV(A) , 7 -> INV(B) 
+begin
+process(count) 
+begin
+choose_alu<= '0';
+enable<= '1';
+if(count(2) = '0' and count(1) = '0') then
+sel<="011";
+elsif(count(2) = '0' and count(1) = '1') then
+sel<="101";
+elsif(count(2) = '1' and count(1) = '0') then
+sel<="000";
+elsif(count(2) = '1' and count(1) = '1' and count(0)= '0') then
+sel<="110";
+elsif(count(2) = '1' and count(1) = '1' and count(0)= '1') then
+sel<="111";
+end if;
+end process;
+end Behavioral;

@@ -1,0 +1,15 @@
+--1_bit_Half_Adder by KRISHNA TEJA(180001026) AND JAY BANGAR(180001022)
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity ha is  --1 bit Half Adder
+port(
+a,b: in std_logic;
+s,c: out std_logic);
+end ha;
+architecture structural of ha is
+begin
+s <= a xor b;
+c <= a and b;
+end structural;

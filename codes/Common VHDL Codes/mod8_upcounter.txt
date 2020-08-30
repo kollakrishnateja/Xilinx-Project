@@ -1,0 +1,25 @@
+--mod8_negative_edge_triggered_synchronous_upcounter by KRISHNA TEJA(180001026) AND JAY BANGAR(180001022)
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity mod8_counter is
+port(
+clk,reset : in STD_LOGIC;
+COUNT :inout STD_LOGIC_VECTOR(2 downto 0):=(others=>'0') );
+end mod8_counter;
+
+architecture Behavioral of mod8_counter is
+begin
+	process(clk,reset)
+	begin
+	if(reset = '1' ) then
+		COUNT<="000";
+	elsif (falling_edge(clk)) then
+		COUNT <= COUNT + '1';
+	end if;
+	end process;
+end Behavioral;
+

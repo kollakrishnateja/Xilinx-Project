@@ -1,0 +1,22 @@
+--8_bit_latch by KRISHNA TEJA(180001026) AND JAY BANGAR(180001022)
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity latch_8bit is
+port(
+clk: in std_logic;
+inp: in std_logic_vector(7 downto 0);
+output_latch: out std_logic_vector(7 downto 0)
+);
+end latch_8bit;
+
+architecture Behavioural of latch_8bit is
+begin
+	process(inp,clk)
+		begin
+			if(clk = '1') then
+				output_latch <= inp;
+			end if;
+	end process;
+end Behavioural;

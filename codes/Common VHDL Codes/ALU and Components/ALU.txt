@@ -1,0 +1,101 @@
+--ALU by KRISHNA TEJA(180001026) AND JAY BANGAR(180001022)
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity ALU_8BIT is
+port(
+a: in std_logic_vector(7 downto 0);
+b: in std_logic_vector(7 downto 0);
+enable,choose : in std_logic;
+alu_out: inout std_logic_vector(7 downto 0);
+carry: inout std_logic;
+selec: in std_logic_vector(2 downto 0)
+);
+end ALU_8BIT;
+
+architecture structural of ALU_8BIT is
+component adder is
+port(
+a,b : in std_logic_vector(7 downto 0);
+sum: out std_logic_vector(7 downto 0);
+carry: out std_logic
+);
+end component;
+
+component subtractor is
+port(
+a,b: in std_logic_vector(7 downto 0);
+difference: out std_logic_vector(7 downto 0);
+borrow:out std_logic
+);
+end component;
+
+component invert is
+port(
+a: in  std_logic_vector(7 downto 0);
+abar:out std_logic_vector(7 downto 0)
+);
+end component;
+
+signal su,di : std_logic_vector(7 downto 0);
+signal ca,bo : std_logic; 
+signal ina,inb : std_logic_vector(7 downto 0);
+
+
+begin
+s1: adder port map(a=>a,b=>b,sum=>su,carry=>ca);
+d1: subtractor port map(a=>a,b=>b,difference=>di,borrow=>bo);
+i1: invert port map(a=>a,abar=>ina);
+i2: invert port map(a=>b,abar=>inb);
+
+process(enable,a,b,selec,su,di,ca,bo,ina,inb,choose)
+
+begin
+	
+	if(enable = '1') then
+		if(selec="000") then
+			alu_out<=su;carry<=ca;
+		elsif(selec="001")then
+			alu_out<=di;carry<=bo;
+		elsif(selec="010")then
+			if(choose = '0') then
+			alu_out<=a and b;
+			elsif(choose = '1') then
+			alu_out<=a and a;
+			end if;
+			carry <= 'X';
+		elsif(selec="011")then
+			if(choose = '0') then
+			alu_out<=a or b;
+			elsif(choose = '1') then
+			alu_out<=b or b;
+			end if;
+			carry <= 'X';
+		elsif(selec="100")then
+			alu_out<= a nand b;
+			carry <= 'X';
+		elsif(selec="101")then
+			if(choose = '0') then
+			alu_out<=a xor b;
+			elsif(choose = '1') then
+			alu_out<=a xor a;
+			end if;
+			carry <= 'X';
+		elsif(selec="110")then
+			alu_out<= ina;
+			carry <= 'X';
+		elsif(selec="111")then
+			alu_out<= inb;
+			carry <= 'X';
+		else
+		alu_out<= "ZZZZZZZZ";
+		end if;	
+	else
+		alu_out<="XXXXXXXX";
+	end if;
+end process;
+
+end structural;

@@ -1,0 +1,34 @@
+--1G_Controller_by_KRISHNA TEJA(180001026) AND JAY BANGAR(180001022)
+
+----------------------------------------------------------------------------------
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity Q1_G_Controller is
+port(
+count: in std_logic_vector(2 downto 0);
+sel: out std_logic_vector(2 downto 0);
+enable,choose_alu: out std_logic
+);	
+end Q1_G_Controller;
+
+architecture Behavioral of Q1_G_Controller is
+-- ALU 0 -> ADDITION , 1 -> SUBTRACTION , 2 -> AND , 3 -> OR , 4 -> NAND , 5 -> XOR , 6 -> INV(A) , 7 -> INV(B) 
+signal ck: std_logic :='0';
+begin
+process(count)
+begin
+choose_alu<='0';
+if(ck='0') then
+enable<='1';
+sel<="101";
+if(count = "111") then
+ck<='1';
+end if;
+elsif(ck = '1') then
+enable<='0';
+end if;
+end process;
+end Behavioral;
